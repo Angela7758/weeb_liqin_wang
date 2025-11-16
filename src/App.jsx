@@ -13,8 +13,6 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <Router>
           <div className="app">
