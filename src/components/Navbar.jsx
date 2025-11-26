@@ -1,42 +1,71 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const closeMenu = () => setIsOpen(false);
+
+  const isContactPage = location.pathname === "/contact";
 
   return (
-    <header className="navbar">
-      <div className="nav-inner">
-        <Link to="/" className="logo">weeb</Link>
+    <header className="navbar-wrapper">
+      <nav className="navbar container">
 
-        {/* 桌面端导航 */}
-        <nav className="nav-links desktop-only">
-          <Link to="/">About Us</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/login" className="btn-outline">Log In</Link>
-          <button className="btn-primary">Join Now</button>
-        </nav>
+        {/* ---- GAUCHE : Logo  ---- */}
+        <div className="navbar-left">
+          <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
+            weeb
+          </NavLink>
 
-        {/* 移动端菜单按钮 */}
-        <button
-          className="burger mobile-only"
-          onClick={() => setOpen(!open)}
-          aria-label="Open menu"
-        >
-          ☰
+          <div className="navbar-links-left">
+            <NavLink to="/" className="nav-link">
+              About Us
+            </NavLink>
+
+            <NavLink to="/contact" className="nav-link">
+              Contact
+            </NavLink>
+          </div>
+        </div>
+
+        {/* ---- DROITE : Log In + Join Now ---- */}
+        <div className="navbar-links-right">
+          <NavLink to="/login" className="nav-link">
+            Log In
+          </NavLink>
+
+          <button className="btn-primary nav-cta">
+            {isContactPage ? "Se connecter" : "Join Now"}
+          </button>
+        </div>
+
+        {/* ---- MOBILE ---- */}
+        <button className="navbar-toggle" onClick={toggleMenu}>
+          <span className="toggle-bar" />
+          <span className="toggle-bar" />
+          <span className="toggle-bar" />
         </button>
-      </div>
+      </nav>
 
-      {/* 移动端下拉菜单 */}
-      {open && (
-        <nav className="mobile-menu mobile-only">
-          <Link to="/" onClick={() => setOpen(false)}>About Us</Link>
-          <Link to="/contact" onClick={() => setOpen(false)}>Contact</Link>
-          <Link to="/login" onClick={() => setOpen(false)}>Log In</Link>
-        </nav>
+      {/* MENU MOBILE */}
+      {isOpen && (
+        <div className="mobile-menu">
+          <NavLink to="/" className="mobile-link" onClick={closeMenu}>
+            Home
+          </NavLink>
+          <NavLink to="/contact" className="mobile-link" onClick={closeMenu}>
+            Contact
+          </NavLink>
+          <NavLink to="/login" className="mobile-link" onClick={closeMenu}>
+            Log In
+          </NavLink>
+        </div>
       )}
     </header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
