@@ -67,7 +67,7 @@ function Footer() {
 
       {/* Section droits + réseaux sociaux */}
       <div className="container footer-bottom">
-        <span className="footer-copy">© 2025 Weeb, Inc. All rights reserved.</span>
+        <span className="footer-copy">© 2025 Weeb. Tous droits réservés. </span>
 
         <div className="footer-socials">
           <img src={youtube} alt="YouTube" />
