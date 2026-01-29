@@ -1,6 +1,6 @@
 import React from "react";
 
-// Import des logos sociaux
+// Images des réseaux sociaux
 import youtube from "../images/youtube.png";
 import facebook from "../images/facebook.png";
 import twitter from "../images/twitter.png";
@@ -10,6 +10,7 @@ import linkedin from "../images/linkedin.png";
 function Footer() {
   return (
     <footer className="footer">
+      {/* Colonnes du footer */}
       <div className="container footer-columns">
 
         {/* Logo */}
@@ -17,7 +18,7 @@ function Footer() {
           <h2 className="footer-logo">weeb</h2>
         </div>
 
-        {/* PRODUCT */}
+        {/* Product */}
         <div className="footer-col">
           <h4 className="footer-heading">PRODUCT</h4>
           <ul>
@@ -29,7 +30,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* SOLUTIONS */}
+        {/* Solutions */}
         <div className="footer-col">
           <h4 className="footer-heading">SOLUTIONS</h4>
           <ul>
@@ -40,7 +41,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* RESOURCES */}
+        {/* Resources */}
         <div className="footer-col">
           <h4 className="footer-heading">RESOURCES</h4>
           <ul>
@@ -50,7 +51,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* COMPANY */}
+        {/* Company */}
         <div className="footer-col">
           <h4 className="footer-heading">COMPANY</h4>
           <ul>
@@ -62,13 +63,16 @@ function Footer() {
         </div>
       </div>
 
-      {/* Séparateur */}
+      {/* Ligne de séparation */}
       <div className="footer-divider"></div>
 
-      {/* Section droits + réseaux sociaux */}
+      {/* Bas du footer */}
       <div className="container footer-bottom">
-        <span className="footer-copy">© 2025 Weeb. Tous droits réservés. </span>
+        <span className="footer-copy">
+          © 2025 Weeb. Tous droits réservés.
+        </span>
 
+        {/* Réseaux sociaux */}
         <div className="footer-socials">
           <img src={youtube} alt="YouTube" />
           <img src={facebook} alt="Facebook" />

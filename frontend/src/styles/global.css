@@ -55,11 +55,11 @@ a:hover {
   padding: 0 24px;
 }
 
-/* ===================== Navbar ========================= */
+/*  Navbar */
 
 .navbar-wrapper {
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding: 24px 0;
+
 }
 
 .navbar {
@@ -148,7 +148,7 @@ a:hover {
 }
 
 
-/* ------------------------------- Home_hero  ------------------------------*/
+/*  Home_hero  */
 
 .home-page {
   background-color: #050816;
@@ -220,7 +220,7 @@ a:hover {
   margin-bottom: 56px;
 }
 
-/* ================================ Home_hero_image ================================ */
+/*  Home_hero_image  */
 
 .hero-illustration {
   max-width: 1040px;
@@ -244,7 +244,7 @@ a:hover {
 
 
 
-/* ================================ Section_Ils nous font confiance ================================ */
+/*  Section_Ils nous font confiance  */
 
 .trusted-section {
   padding-top: 0px;
@@ -291,7 +291,7 @@ a:hover {
 
 
 
-/* ===================   Section_Feature ======================== */
+/*  Section_Feature  */
 
 .feature-section {
   max-width: 1100px;
@@ -334,7 +334,7 @@ a:hover {
 
 
 
-/* ======================  Section_Tendance  ========================= */
+/*  Section_Tendance   */
 
 .tendance-section {
   max-width: 1200px;
@@ -401,7 +401,7 @@ a:hover {
 }
 
 
-/* ========================= Page_Contact ================================ */
+/*  Page_Contact  */
 
 .contact-page {
   background-color: #050816; 
@@ -515,7 +515,7 @@ a:hover {
   padding: 10px 32px;
 }
 
-/* =========================  Contact-Responsive ========================= */
+/*  Contact-Responsive  */
 
 /* Adaptation tablette */
 @media (max-width: 900px) {
@@ -543,7 +543,7 @@ a:hover {
 }
 
 
-/* ====================== Page_Login  ========================= */
+/*  Page_Login   */
 
 .login-page {
   background-color: #050816; 
@@ -632,7 +632,7 @@ a:hover {
   cursor: pointer;
 }
 
-/* =========================== Page_Login-Résponsive  ================================ */
+/*  Page_Login-Résponsive   */
 
 /* Adaptation pour les petits écrans (mobile) */
 @media (max-width: 768px) {
@@ -646,7 +646,7 @@ a:hover {
 }
 
 
-/* =========================== Page_Footer ========================== */
+/* Page_Footer  */
 
 
 .footer {
@@ -744,7 +744,7 @@ a:hover {
   opacity: 1;
 }
 
-/* ============================ Footer - Responsive  =========================== */
+/*  Footer - Responsive  */
 
 /* tablette  */
 @media (max-width: 1024px) {
@@ -773,7 +773,7 @@ a:hover {
 }
 
 
-/* ============================ Tablette + Mobile - Responsive ============================ */
+/*  Tablette + Mobile - Responsive */
 
 /* Tablette */
 @media (max-width: 1024px) {

@@ -14,7 +14,7 @@ function Navbar() {
     <header className="navbar-wrapper">
       <nav className="navbar container">
 
-        {/* ---- GAUCHE : Logo  ---- */}
+        {/* ---- Gauche : Logo  ---- */}
         <div className="navbar-left">
           <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
             weeb
@@ -31,7 +31,7 @@ function Navbar() {
           </div>
         </div>
 
-        {/* ---- DROITE : Log In + Join Now ---- */}
+        {/* ---- Droite : Log In + Join Now ---- */}
         <div className="navbar-links-right">
           <NavLink to="/login" className="nav-link">
             Log In
@@ -42,7 +42,7 @@ function Navbar() {
           </button>
         </div>
 
-        {/* ---- MOBILE ---- */}
+        {/* ---- Mobile ---- */}
         <button className="navbar-toggle" onClick={toggleMenu}>
           <span className="toggle-bar" />
           <span className="toggle-bar" />
@@ -50,7 +50,7 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* MENU MOBILE */}
+      {/* Menu Mobile */}
       {isOpen && (
         <div className="mobile-menu">
           <NavLink to="/" className="mobile-link" onClick={closeMenu}>
