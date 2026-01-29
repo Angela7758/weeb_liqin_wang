@@ -31,8 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
      "weeb-liqin-backend.onrender.com",
-     "localhost",
-     "127.0.0.1",
 ]
 
 
