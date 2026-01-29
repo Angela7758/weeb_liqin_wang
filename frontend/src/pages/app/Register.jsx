@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Register() {
   // Champs du formulaire
@@ -9,12 +12,14 @@ function Register() {
   // Message affiché à l'utilisateur
   const [message, setMessage] = useState("");
 
+  const navigate = useNavigate();
+
   // Envoi du formulaire
   function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
 
-    fetch("http://127.0.0.1:8001/api/auth/register/", {
+    fetch(`${API_URL}/api/auth/register/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,19 +30,18 @@ function Register() {
         password: password,
       }),
     })
-      .then(function (response) {
-        if (response.ok) {
-          setMessage("Compte créé avec succès. Vous pouvez vous connecter.");
-
-          // Réinitialiser le formulaire
-          setUsername("");
-          setEmail("");
-          setPassword("");
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.id || data.username) {
+          setMessage("Compte créé avec succès. Redirection vers la connexion...");
+          setTimeout(() => {
+            navigate("/login");
+          }, 1000);
         } else {
           setMessage("Erreur lors de la création du compte.");
         }
       })
-      .catch(function () {
+      .catch(() => {
         setMessage("Erreur serveur.");
       });
   }
@@ -53,9 +57,7 @@ function Register() {
             <input
               className="login-input"
               value={username}
-              onChange={function (e) {
-                setUsername(e.target.value);
-              }}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
@@ -66,9 +68,7 @@ function Register() {
               type="email"
               className="login-input"
               value={email}
-              onChange={function (e) {
-                setEmail(e.target.value);
-              }}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -79,14 +79,12 @@ function Register() {
               type="password"
               className="login-input"
               value={password}
-              onChange={function (e) {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
-          {message !== "" && <p>{message}</p>}
+          {message && <p>{message}</p>}
 
           <button type="submit" className="btn-primary login-button">
             Créer un compte

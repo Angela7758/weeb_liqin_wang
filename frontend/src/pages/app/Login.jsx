@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ function Login() {
     e.preventDefault();
     setError("");
 
-    fetch("http://127.0.0.1:8005/api/auth/login/", {
+    fetch(`${API_URL}/api/auth/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,6 +32,9 @@ function Login() {
         } else {
           setError("Nom d'utilisateur ou mot de passe incorrect");
         }
+      })
+      .catch(() => {
+        setError("Erreur de connexion au serveur");
       });
   }
 
@@ -39,7 +44,6 @@ function Login() {
         <h1 className="login-title">Se connecter</h1>
 
         <form className="login-card" onSubmit={handleSubmit}>
-          
           <div className="login-field">
             <label>Nom d'utilisateur</label>
             <input
