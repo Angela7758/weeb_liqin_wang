@@ -17,6 +17,9 @@ class ArticleListCreateView(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 # Détail, modification et suppression d'un article
 class ArticleRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
@@ -59,14 +62,15 @@ def register(request):
         password=password
     )
 
-    user.is_active = True
+    user.is_active = False
     user.role = "USER"
     user.save()
 
-    return Response(
-        {"message": "Compte créé avec succès"},
-        status=status.HTTP_201_CREATED
-    )
+    return Response({
+        "id": user.id,
+        "username": user.username,
+        "message": "Compte créé avec succès"
+    }, status=status.HTTP_201_CREATED)
 
 
 # Connexion et génération du token JWT

@@ -1,14 +1,31 @@
-import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [username, setUsername] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    const storedUsername = localStorage.getItem("username");
+    if (token && storedUsername) {
+      setUsername(storedUsername);
+    } else {
+      setUsername(null);
+    }
+  }, [location]); // Update on route change
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
-  const isContactPage = location.pathname === "/contact";
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("username");
+    setUsername(null);
+    navigate("/login");
+  };
 
   return (
     <header className="navbar-wrapper">
@@ -33,13 +50,25 @@ function Navbar() {
 
         {/* ---- Droite : Log In + Join Now ---- */}
         <div className="navbar-links-right">
-          <NavLink to="/login" className="nav-link">
-            Log In
-          </NavLink>
+          {username ? (
+            <div className="user-info" >
+              <span>Welcome, {username}</span>
+              <span>.</span>
+              <button onClick={handleLogout} className="btn-primary logout-button">
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <>
+              <NavLink to="/login" className="nav-link">
+                Log In
+              </NavLink>
 
-          <button className="btn-primary nav-cta">
-            {isContactPage ? "Se connecter" : "Join Now"}
-          </button>
+              <NavLink to="/register" className="nav-link">
+                Join Now
+              </NavLink>
+            </>
+          )}
         </div>
 
         {/* ---- Mobile ---- */}

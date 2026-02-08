@@ -5,7 +5,6 @@ from django.conf import settings
 
 # Utilisateur
 class User(AbstractUser):
-    # Rôle de l'utilisateur (simple)
     role = models.CharField(max_length=20, default="USER")
 
     # L'utilisateur est actif par défaut

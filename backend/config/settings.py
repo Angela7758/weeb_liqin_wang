@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure-=r3p81x__sx5$va+vr*=b%-(u0zt!h)h4%yp!i5h+nxn-8c!0^
 DEBUG = True
 
 ALLOWED_HOSTS = [
-     "weeb-liqin-backend.onrender.com",
+     "https://weeb-liqin-backend.onrender.com",
+     "127.0.0.1"
 ]
 
 

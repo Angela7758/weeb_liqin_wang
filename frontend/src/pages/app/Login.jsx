@@ -28,7 +28,8 @@ function Login() {
       .then((data) => {
         if (data.access) {
           localStorage.setItem("access_token", data.access);
-          navigate("/");
+          localStorage.setItem("username", username);
+          navigate("/add-article");
         } else {
           setError("Nom d'utilisateur ou mot de passe incorrect");
         }

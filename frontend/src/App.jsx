@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -8,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/web/Home";
 import Contact from "./pages/web/Contact";
 import Articles from "./pages/web/Articles";
+import AddArticles from "./pages/web/AddArticles";
 
 import Login from "./pages/app/Login";
 import Register from "./pages/app/Register"; // 
@@ -27,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/articles" element={<Articles />} />
+        <Route path="/add-article" element={<AddArticles />} />
 
         {/* Authentifications */}
         <Route path="/login" element={<Login />} />
