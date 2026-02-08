@@ -62,7 +62,7 @@ def register(request):
         password=password
     )
 
-    user.is_active = False
+    user.is_active = True
     user.role = "USER"
     user.save()
 
