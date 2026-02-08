@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
 function Contact() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -20,7 +22,7 @@ function Contact() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://127.0.0.1:8000/api/contact/", {
+    fetch(`${API_URL}/api/contact/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
