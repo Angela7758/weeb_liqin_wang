@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
 
   // Récupération des articles
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/articles/")
+    fetch(`${API_URL}/api/articles/`)
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
