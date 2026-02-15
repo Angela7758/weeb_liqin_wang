@@ -89,6 +89,7 @@ python manage.py createsuperuser
 
 L’interface d’administration Django est accessible via :
 http://127.0.0.1:8000/admin/
+ou https://weeb-liqin-backend.onrender.com/admin/
 
 replace: PROD_URL by the real URL
 jpg-ghgr-gva
