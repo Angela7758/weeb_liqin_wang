@@ -13,7 +13,7 @@ from .serializers import ArticleSerializer, ContactMessageSerializer
 
 # Liste des articles + création
 class ArticleListCreateView(generics.ListCreateAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -23,7 +23,7 @@ class ArticleListCreateView(generics.ListCreateAPIView):
 
 # Détail, modification et suppression d'un article
 class ArticleRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticated]
 
