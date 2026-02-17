@@ -54,6 +54,9 @@ function Navbar() {
             <div className="user-info" >
               <span>Welcome, {username}</span>
               <span>.</span>
+              <button onClick={() => navigate("/add-article")} className="btn-primary add-article-button">
+                Add Article
+              </button>
               <button onClick={handleLogout} className="btn-primary logout-button">
                 Log Out
               </button>
