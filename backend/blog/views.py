@@ -25,7 +25,7 @@ class ArticleListCreateView(generics.ListCreateAPIView):
 class ArticleRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 # Formulaire de contact
