@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 function Articles() {
@@ -26,7 +28,16 @@ function Articles() {
           key={article.id}
           style={{ marginBottom: "32px", borderBottom: "1px solid #444" }}
         >
-          <h2>{article.title}</h2>
+          <h2>
+            <Link 
+              to={`/articles/${article.id}`}
+              style={{ color: "inherit", textDecoration: "none", cursor: "pointer" }}
+              onMouseEnter={(e) => e.target.style.color = "#4a9eff"}
+              onMouseLeave={(e) => e.target.style.color = "inherit"}
+            >
+              {article.title}
+            </Link>
+          </h2>
 
           <p style={{ fontSize: "14px", color: "#aaa" }}>
             Par {article.author} —{" "}
