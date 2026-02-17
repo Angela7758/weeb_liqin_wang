@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/web/Home";
 import Contact from "./pages/web/Contact";
 import Articles from "./pages/web/Articles";
+import ArticleDetail from "./pages/web/ArticleDetail";
 import AddArticles from "./pages/web/AddArticles";
 
 import Login from "./pages/app/Login";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:id" element={<ArticleDetail />} />
         <Route path="/add-article" element={<AddArticles />} />
 
         {/* Authentifications */}
