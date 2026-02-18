@@ -51,9 +51,8 @@ function Navbar() {
         {/* ---- Droite : Log In + Join Now ---- */}
         <div className="navbar-links-right">
           {username ? (
-            <div className="user-info" >
+            <div className="user-info" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <span>Welcome, {username}</span>
-              <span>.</span>
               <button onClick={() => navigate("/add-article")} className="btn-primary add-article-button">
                 Add Article
               </button>
