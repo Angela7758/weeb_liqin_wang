@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -11,33 +11,55 @@ from .models import Article, ContactMessage
 from .serializers import ArticleSerializer, ContactMessageSerializer
 
 
-# Liste des articles + création
 class ArticleListCreateView(generics.ListCreateAPIView):
+    """
+    GET  /api/articles/ → liste des articles, du plus récent au plus ancien
+    POST /api/articles/ → créer un article (authentification requise)
+    """
     queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        """Associe automatiquement l'auteur connecté à l'article créé."""
         serializer.save(author=self.request.user)
 
 
-# Détail, modification et suppression d'un article
 class ArticleRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET    /api/articles/<id>/ → retourne un article spécifique
+    PUT    /api/articles/<id>/ → modifie complètement un article (authentification requise)
+    PATCH  /api/articles/<id>/ → modifie partiellement un article (authentification requise)
+    DELETE /api/articles/<id>/ → supprime un article (authentification requise)
+    """
     queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# Formulaire de contact
 class ContactListCreateView(generics.ListCreateAPIView):
+    """
+    GET  /api/contact/ → retourne la liste de tous les messages de contact
+    POST /api/contact/ → enregistre un message et calcule le score de satisfaction
+    """
     queryset = ContactMessage.objects.all().order_by("-created_at")
     serializer_class = ContactMessageSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
+
+    def perform_create(self, serializer):
+        """Analyse la satisfaction du message avant de le sauvegarder en base."""
+        from .ml import analyze_satisfaction
+        message = self.request.data.get('message', '')
+        satisfaction = analyze_satisfaction(message)
+        serializer.save(satisfaction=satisfaction)
 
 
-# Inscription utilisateur
 @api_view(["POST"])
 def register(request):
+    """
+    Crée un nouveau compte utilisateur.
+    Champs requis : username, email, password
+    """
     User = get_user_model()
 
     username = request.data.get("username")
@@ -73,9 +95,12 @@ def register(request):
     }, status=status.HTTP_201_CREATED)
 
 
-# Connexion et génération du token JWT
 @api_view(["POST"])
 def login(request):
+    """
+    Authentifie un utilisateur et retourne un token JWT.
+    Champs requis : username, password
+    """
     username = request.data.get("username")
     password = request.data.get("password")
 
