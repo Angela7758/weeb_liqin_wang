@@ -1,4 +1,8 @@
-def predict_satisfaction(message: str) -> int:
+def analyze_satisfaction(message: str) -> int:
+    """
+    Analyse le texte d'un message et retourne un score de satisfaction.
+    Retourne 1 si le message est positif, 0 si négatif.
+    """
     positive_words = [
         "merci", "super", "génial", "excellent", "parfait", "top", "bien"
     ]
@@ -16,4 +20,4 @@ def predict_satisfaction(message: str) -> int:
         if word in msg:
             return 0
 
-    return 1
+    return 1  # par défaut : positif
