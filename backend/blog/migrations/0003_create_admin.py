@@ -1,5 +1,6 @@
 from django.db import migrations
 
+
 def create_admin_user(apps, schema_editor):
     User = apps.get_model('blog', 'User')
     if not User.objects.filter(username='admin').exists():
@@ -8,6 +9,7 @@ def create_admin_user(apps, schema_editor):
             email='admin@example.com',
             password='Admin123456!'
         )
+
 
 class Migration(migrations.Migration):
 
