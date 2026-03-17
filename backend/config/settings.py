@@ -22,14 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=r3p81x__sx5$va+vr*=b%-(u0zt!h)h4%yp!i5h+nxn-8c!0^'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-=r3p81x__sx5$va+vr*=b%-(u0zt!h)h4%yp!i5h+nxn-8c!0^'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') != 'False'
 
 ALLOWED_HOSTS = [
-     "weeb-liqin-backend.onrender.com",
-     "127.0.0.1"
+    "weeb-liqin-backend.onrender.com",
+    "127.0.0.1",
+    "localhost",
 ]
 
 
@@ -84,7 +88,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+        default=os.environ.get(
+            'DATABASE_URL',
+            f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+        ),
         conn_max_age=600
     )
 }
@@ -120,12 +127,16 @@ USE_TZ = True
 # Static files
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# WhiteNoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS - on accepte seulement le frontend Vercel et localhost
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://weeb-liqin-wang.vercel.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 AUTH_USER_MODEL = 'blog.User'
 
@@ -135,6 +146,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+# JWT : access token 5 minutes, refresh token 7 jours
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
